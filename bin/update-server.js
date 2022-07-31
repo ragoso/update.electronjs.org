@@ -21,7 +21,8 @@ const {
   GH_TOKEN: token,
   REDIS_URL: redisUrl = 'redis://localhost:6379',
   PORT: port = 3000,
-  CACHE_TTL: cacheTTL = '15m'
+  CACHE_TTL: cacheTTL = '15m',
+  S3_BUCKET_URL: s3_bucket_url
 } = process.env
 assert(token, 'GH_TOKEN required')
 
@@ -57,7 +58,7 @@ const cache = {
 // Go!
 //
 
-const updates = new Updates({ token, cache })
+const updates = new Updates({ token, cache, s3_bucket_url })
 updates.listen(port, () => {
   console.log(`http://localhost:${port}`)
 })

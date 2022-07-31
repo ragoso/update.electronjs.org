@@ -27,10 +27,11 @@ const PLATFORM_ARCH = {
 const PLATFORM_ARCHS = Object.values(PLATFORM_ARCH)
 
 class Updates {
-  constructor ({ token, cache } = {}) {
+  constructor ({ token, cache, s3_bucket_url } = {}) {
     assert(cache, '.cache required')
     this.token = token
     this.cache = cache
+    this.s3_bucket_url = s3_bucket_url
   }
 
   listen (port, cb) {
@@ -201,7 +202,7 @@ class Updates {
           latest[platform] = {
             name: release.name,
             version: release.tag_name,
-            url: asset.browser_download_url,
+            url: this.s3_bucket_url ? `${this.s3_bucket_url}/${release.name.substring(1)}/${asset.name}` : asset.browser_download_url,
             notes: release.body
           }
         }
