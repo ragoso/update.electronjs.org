@@ -218,7 +218,7 @@ class Updates {
 
     for (const key of [PLATFORM_ARCH.WIN_X64, PLATFORM_ARCH.WIN_IA32, PLATFORM_ARCH.WIN_ARM64]) {
       if (latest[key]) {
-        const rurl = `https://github.com/${account}/${repository}/releases/download/${latest[key].version}/RELEASES`
+        const rurl = `${this.s3_bucket_url}/${latest[key].version}/RELEASES`
         const rres = await fetch(rurl)
         if (rres.status < 400) {
           const body = await rres.text()
