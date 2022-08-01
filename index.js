@@ -219,7 +219,7 @@ class Updates {
     for (const key of [PLATFORM_ARCH.WIN_X64, PLATFORM_ARCH.WIN_IA32, PLATFORM_ARCH.WIN_ARM64]) {
       log.info({ key }, 'platform')
       if (latest[key]) {
-        const rurl = `${this.s3_bucket_url}/${latest[key].version}/RELEASES`
+        const rurl = `${this.s3_bucket_url}/${latest[key].version.substring(1)}/RELEASES`
         log.info({ rurl }, 'fetching RELEASES')
         const rres = await fetch(rurl)
         if (rres.status < 400) {
