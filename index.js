@@ -203,7 +203,7 @@ class Updates {
             name: release.name,
             version: release.tag_name,
             url: this.s3_bucket_url ? `${this.s3_bucket_url}/${release.name.substring(1)}/${encodeURIComponent(asset.name)}` : asset.browser_download_url,
-            notes: release.body
+            notes: release.body || ''
           }
         }
         if (hasAllAssets(latest)) {
