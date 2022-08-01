@@ -219,8 +219,10 @@ class Updates {
     for (const key of [PLATFORM_ARCH.WIN_X64, PLATFORM_ARCH.WIN_IA32, PLATFORM_ARCH.WIN_ARM64]) {
       if (latest[key]) {
         const rurl = `${this.s3_bucket_url}/${latest[key].version}/RELEASES`
+        log.info({ rurl }, 'fetching RELEASES')
         const rres = await fetch(rurl)
         if (rres.status < 400) {
+          log.info({ rurl }, 'RELEASES fetched')
           const body = await rres.text()
           const matches = body.match(/[^ ]*\.nupkg/gim)
           const nuPKG = rurl.replace('RELEASES', matches[0])
