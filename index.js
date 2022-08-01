@@ -202,7 +202,7 @@ class Updates {
           latest[platform] = {
             name: release.name,
             version: release.tag_name,
-            url: this.s3_bucket_url ? `${this.s3_bucket_url}/${release.name.substring(1)}/${asset.name}` : asset.browser_download_url,
+            url: this.s3_bucket_url ? `${this.s3_bucket_url}/${release.name.substring(1)}/${encodeURIComponent(asset.name)}` : asset.browser_download_url,
             notes: release.body
           }
         }
